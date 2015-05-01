@@ -5,21 +5,21 @@ import java.awt.Robot;
 import java.awt.event.InputEvent;
 
 import com.sri.pointer.utilities.ActionCode;
-import com.sri.pointer.utilities.EventGenerator;
-import com.sri.pointer.utilities.IncrementXY;
-import com.sri.pointer.utilities.PointerChangeListener;
-import com.sri.pointer.utilities.PointerPosition;
+import com.sri.pointer.utilities.PointerEventObserver;
+import com.sri.pointer.utilities.RelativePosition;
+import com.sri.pointer.utilities.PointerEventListener;
+import com.sri.pointer.utilities.AbsolutePosition;
 import com.sri.pointer.utilities.PositionQueue;
-public class MouseXY implements PointerChangeListener{
+public class Locator implements PointerEventListener{
 	
 	private static int LEFT =  InputEvent.BUTTON1_DOWN_MASK;
 	private static int RIGHT = InputEvent.BUTTON3_DOWN_MASK;
 	
 	private static Robot robot;
-	private static PointerPosition pointer = new PointerPosition();
+	private static AbsolutePosition pointer = new AbsolutePosition();
 	
-	public MouseXY(){
-		EventGenerator.addActionListener(this);
+	public Locator(){
+		PointerEventObserver.addActionListener(this);
 	}
 	static{
 		try {
@@ -32,7 +32,7 @@ public class MouseXY implements PointerChangeListener{
 	@Override
 	public void delegateToCommands() {
 		try{
-			IncrementXY incr = PositionQueue.q.remove();
+			RelativePosition incr = PositionQueue.q.remove();
 			switch(incr.getActionCode()){
 				case ActionCode.MOVE_PTR : pointerMove(incr); break;
 				case ActionCode.SINGLE_CLICK : leftClick(); break;
@@ -46,10 +46,10 @@ public class MouseXY implements PointerChangeListener{
 		
 	}
 	
-	private void scroll(IncrementXY incr){
+	private void scroll(RelativePosition incr){
 		robot.mouseWheel(incr.getY());
 	}
-	private void pointerMove(IncrementXY incr){
+	private void pointerMove(RelativePosition incr){
 		pointer.add(incr);
 		robot.mouseMove(pointer.getX(), pointer.getY());
 	}

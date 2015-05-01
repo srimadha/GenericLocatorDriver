@@ -7,14 +7,14 @@ import java.util.PriorityQueue;
 public class PositionQueue {
 	
 	
-	static class PQPrefComparator implements Comparator<IncrementXY> {
+	static class PQPrefComparator implements Comparator<RelativePosition> {
 		 
-		public int compare(IncrementXY one, IncrementXY two) {
+		public int compare(RelativePosition one, RelativePosition two) {
 			return two.getPriority() - one.getPriority();
 		}
 	}
 	
 	
-	public static PriorityQueue<IncrementXY> q = new PriorityQueue<IncrementXY>(10, new PQPrefComparator());
+	public static PriorityQueue<RelativePosition> q = new PriorityQueue<RelativePosition>(10, new PQPrefComparator());
 
 }

@@ -1,6 +1,6 @@
 package com.sri.pointer.utilities;
 
-public class IncrementXY {
+public class RelativePosition {
 	private int x;	
 	private int y;
 	

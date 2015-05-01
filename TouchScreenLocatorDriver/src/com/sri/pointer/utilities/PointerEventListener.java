@@ -1,5 +1,5 @@
 package com.sri.pointer.utilities;
 
-public interface PointerChangeListener {
+public interface PointerEventListener {
 	public void delegateToCommands();
 }

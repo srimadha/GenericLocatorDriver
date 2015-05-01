@@ -3,7 +3,7 @@ package com.sri.pointer.utilities;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-public class PointerPosition {
+public class AbsolutePosition {
 	
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	static double MAX_X = screenSize.getWidth();
@@ -14,11 +14,11 @@ public class PointerPosition {
 	private int x;
 	private int y;
 
-	public PointerPosition(){
+	public AbsolutePosition(){
 		 this.x = (int) (MAX_X/2);
 		 this.y = (int) (MAX_Y/2);
 	}
-	public PointerPosition(int x, int y){
+	public AbsolutePosition(int x, int y){
 		this.setX(x);
 		this.setY(y);
 	}
@@ -39,7 +39,7 @@ public class PointerPosition {
 		this.y = y;
 	}
 	
-	public void add(IncrementXY incr){
+	public void add(RelativePosition incr){
 		double newXPos = this.x + incr.getX();
 		double newYPos = this.y + incr.getY();
 		
