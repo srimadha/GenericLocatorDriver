@@ -45,13 +45,18 @@ public class LocatorClientTest {
 				e.printStackTrace();
 			}
         }
+        socket.close();
     }
 
     /**
      * Runs the client as an application with a closeable frame.
      */
-    public static void main(String[] args) throws Exception {
-        LocatorClientTest client = new LocatorClientTest();
-        client.run();
+    public static void main(String[] args) {
+    	try{
+    		LocatorClientTest client = new LocatorClientTest();
+    		client.run();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
     }
 }

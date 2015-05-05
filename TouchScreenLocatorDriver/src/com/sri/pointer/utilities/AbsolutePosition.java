@@ -5,11 +5,11 @@ import java.awt.Toolkit;
 
 public class AbsolutePosition {
 	
-	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	static double MAX_X = screenSize.getWidth();
-	static double MAX_Y = screenSize.getHeight();
-	static double MIN_X = 0;
-	static double MIN_Y = 0;
+	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private static double MAX_X = screenSize.getWidth();
+	private static double MAX_Y = screenSize.getHeight();
+	private static double MIN_X = 0;
+	private static double MIN_Y = 0;
 	
 	private int x;
 	private int y;

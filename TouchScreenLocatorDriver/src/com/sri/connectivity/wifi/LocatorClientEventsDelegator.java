@@ -13,6 +13,8 @@ public class LocatorClientEventsDelegator extends Thread {
     private Socket socket;
     private BufferedReader in;
 
+    static int oldX = 0;
+    static int oldY = 0;
     public LocatorClientEventsDelegator(Socket socket) {
         this.socket = socket;
     }
@@ -22,13 +24,28 @@ public class LocatorClientEventsDelegator extends Thread {
 	 */
 	public static void renderPointer(String input) throws Exception{
 		String xy[] = input.split(",");
+		
+		int newx = (int)(Float.parseFloat(xy[0]));
+		int newy = (int)(Float.parseFloat(xy[1]));
+		
+		int incrX = newx - oldX;
+		int incrY = newy - oldY;
+		
+		if(incrX>15) incrX = 1;
+		if(incrY>15) incrY = 1;
+		if(incrX<-15) incrX = -1;
+		if(incrY<-15) incrY = -1;
+		
 		RelativePosition newIncr = new RelativePosition();
-		newIncr.setX(Integer.parseInt(xy[0]));
-		newIncr.setY(Integer.parseInt(xy[1]));
+		newIncr.setX(incrX);
+		newIncr.setY(incrY);
+		System.out.println(incrX +","+incrY);
 		newIncr.setActionCode(Integer.parseInt(xy[2]));
 		newIncr.setPriority(Integer.parseInt(xy[3]));
 		PositionQueue.q.add(newIncr);		
 		PointerEventObserver.inform();
+		oldX = newx;
+		oldY = newy;
 	}
 
     public void run() {

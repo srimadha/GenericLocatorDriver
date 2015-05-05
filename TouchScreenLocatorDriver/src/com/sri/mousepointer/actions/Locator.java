@@ -1,6 +1,8 @@
 package com.sri.mousepointer.actions;
 
 import java.awt.AWTException;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 
@@ -20,6 +22,7 @@ public class Locator implements PointerEventListener{
 	
 	public Locator(){
 		PointerEventObserver.addActionListener(this);
+		pointerMove();
 	}
 	static{
 		try {
@@ -49,11 +52,15 @@ public class Locator implements PointerEventListener{
 	private void scroll(RelativePosition incr){
 		robot.mouseWheel(incr.getY());
 	}
-	private void pointerMove(RelativePosition incr){
-		pointer.add(incr);
+	
+	private void pointerMove(){
 		robot.mouseMove(pointer.getX(), pointer.getY());
 	}
-	
+	private void pointerMove(RelativePosition incr){
+		getCurrentPosition().add(incr);
+		pointerMove();
+	}
+
 	private void rightClick(){
 		robot.mousePress(RIGHT);
 		robot.mouseRelease(RIGHT);
@@ -69,4 +76,16 @@ public class Locator implements PointerEventListener{
 		robot.mousePress(LEFT);
 		robot.mouseRelease(LEFT);
 	}
+	
+
+	/**
+	 * 
+	 */
+	private AbsolutePosition getCurrentPosition() {
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		pointer.setX(p.x);
+		pointer.setY(p.y);
+		return pointer;
+	}
+	
 }
