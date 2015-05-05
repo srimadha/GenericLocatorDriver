@@ -39,7 +39,8 @@ public class LocatorClientEventsDelegator extends Thread {
 		RelativePosition newIncr = new RelativePosition();
 		newIncr.setX(incrX);
 		newIncr.setY(incrY);
-		System.out.println(incrX +","+incrY);
+	
+		System.out.println(incrX +","+incrY+","+Integer.parseInt(xy[2]));
 		newIncr.setActionCode(Integer.parseInt(xy[2]));
 		newIncr.setPriority(Integer.parseInt(xy[3]));
 		PositionQueue.q.add(newIncr);		

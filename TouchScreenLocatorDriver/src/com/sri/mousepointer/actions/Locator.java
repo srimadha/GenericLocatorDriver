@@ -68,13 +68,28 @@ public class Locator implements PointerEventListener{
 	}
 	
 	private void doubleClick() {
-		leftClick();
-		leftClick();
-		
-	}
-	private void leftClick() {
 		robot.mousePress(LEFT);
 		robot.mouseRelease(LEFT);
+		robot.mousePress(LEFT);
+		robot.mouseRelease(LEFT);
+		
+	}
+	long firstClick = 0;
+	long secondClick = 0;
+	
+	private void leftClick() {
+		if(firstClick == 0){
+			firstClick = System.currentTimeMillis();
+			robot.mousePress(LEFT);
+			robot.mouseRelease(LEFT);
+		}
+		else{
+			if(System.currentTimeMillis() - firstClick < 1700){
+				doubleClick();			
+			}
+			firstClick = 0;
+		}
+		
 	}
 	
 
